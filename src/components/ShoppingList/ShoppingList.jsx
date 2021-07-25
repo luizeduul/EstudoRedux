@@ -1,11 +1,14 @@
-import React from 'react'
-import { Wrapper, Title, Array } from './ShoppingList.styles'
-import Checkbox from '../../shared/Checkbox'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectAllProducts } from '../../redux/Products/Products.selector';
+import { Wrapper, Title, Array } from './ShoppingList.styles';
+import Checkbox from '../../shared/Checkbox';
 
-function ShoppingList ({ title, products, onToggle }) {
+function ShoppingList({ title, products, onToggle }) {
+  const productsFromRedux = useSelector(selectAllProducts);
   return <Wrapper>
     <Title>
-      { title }:
+      {title}:
     </Title>
     <Array>
       {

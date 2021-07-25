@@ -1,43 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Wrapper, Container } from './App.styles';
+
 import LineChart from '../../shared/LineChart';
+
 import AppContainer from '../AppContainer/AppContainer';
 import AppHeader from '../AppHeader';
 import ShoppingList from '../ShoppingList';
-import { Wrapper, Container } from './App.styles';
-import productsMock from '../../mocks/products.json';
+
 import extractPercentage from '../../utils/extractPercentage';
 
-import Calculator from '../Calculator/Calculator';
+import { toogleProduct } from '../../redux/Products/Products.action';
+
+import { 
+  selectAllProducts, 
+  selectSelectedProducts, 
+  selectSelectedProductsTotalPrice
+} from '../../redux/Products/Products.selector';
 
 function App() {
   const colors = ['#62CBC6', '#00ABAD', '#00858C', '#006073', '#004D61']
+  const dispatch = useDispatch();
+  
+  const products = useSelector(selectAllProducts);
+  const selectedProducts = useSelector(selectSelectedProducts);
+  const totalPrice = useSelector(selectSelectedProductsTotalPrice);
 
-  const [products, setProducts] = useState(productsMock.products)
-  const [selectedProducts, setSelectedProducts] = useState([])
-  const [totalPrice, setTotalPrice] = useState(0)
-
-  useEffect(() => {
-    const newSelectedProducts = products
-      .filter(product => product.checked)
-
-    setSelectedProducts(newSelectedProducts)
-  }, [products])
-
-  useEffect(() => {
-    const total = selectedProducts
-      .map(product => product.price)
-      .reduce((a, b) => a + b, 0)
-
-    setTotalPrice(total)
-  }, [selectedProducts])
-
-  function handleToggle(id, checked, name) {
-    const newProducts = products.map(product =>
-      product.id === id
-        ? { ...product, checked: !product.checked }
-        : product
-    )
-    setProducts(newProducts)
+  function handleToggle(id) {
+    dispatch(toogleProduct(id));
   }
 
   return <Wrapper>
@@ -111,7 +101,6 @@ function App() {
                 currency: 'BRL'
               })}
             </div>
-            <Calculator />
           </div>
         </div>}
       />
