@@ -43,8 +43,8 @@ function App() {
         middle={
           <ShoppingList
             title="Sua lista de compras"
-            products={selectedProducts}
             onToggle={handleToggle}
+            displayOnlySelected
           />}
         right={<div>
           estatisticas
