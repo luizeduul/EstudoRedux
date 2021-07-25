@@ -1,7 +1,7 @@
 ## Estudo de redux
 
 <p align="center">
- <img alt="Repository size" src="https://img.shields.io/github/repo-size/luizeduul/study-redux">
+ <img alt="Repository size" src="https://img.shields.io/github/repo-size/luizeduul/EstudoRedux">
  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
 </p>
 
